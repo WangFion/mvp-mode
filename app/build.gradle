@@ -1,0 +1,123 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    // --------------- wf-update: 2020/5/9 17:53 Version Information ---------------
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.applicationId
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        buildConfigField("String", "DEFAULT_CONFIG", "\"default\"")
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // --------------- wf-update: 2020/5/9 17:55 Signature information ---------------
+    signingConfigs {
+        debug {
+
+        }
+        release {
+            keyAlias 'mvp'
+            keyPassword 'mvp123'
+            storeFile file('../sign/mvp.jks')
+            storePassword 'mvp123'
+        }
+    }
+
+    // --------------- wf-update: 2020/5/20 19:04 Build information ---------------
+    buildTypes {
+        debug {
+            buildConfigField("String", "BUILD_TYPES", "\"build_debug\"")
+        }
+        release {
+            buildConfigField("String", "BUILD_TYPES", "\"build_release\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    // --------------- wf-update: 2020/5/19 20:36 Flavor information ---------------
+    flavorDimensions "company", "channel"
+    productFlavors {
+        huawei {
+            dimension "company"
+            buildConfigField("String", "FLAVOR_COMPANY", "\"huawei\"")
+            manifestPlaceholders = [
+                    SHARED_USER_ID: "android.uid.huawei",
+                    CHANNEL_VALUE : "huawei"
+            ]
+        }
+        xiaomi {
+            dimension "company"
+            buildConfigField("String", "FLAVOR_COMPANY", "\"xiaomi\"")
+            manifestPlaceholders = [
+                    SHARED_USER_ID: "android.uid.xiaomi",
+                    CHANNEL_VALUE : "xiaomi"
+            ]
+        }
+
+        phone {
+            dimension "channel"
+            buildConfigField("String", "FLAVOR_COMPANY", "\"phone\"")
+            buildConfigField("String", "FLAVOR_CHANNEL", "\"phone\"")
+            manifestPlaceholders = [
+                    SHARED_USER_ID: "android.uid.phone",
+                    CHANNEL_VALUE : "phone"
+            ]
+        }
+        tv {
+            dimension "channel"
+            buildConfigField("String", "FLAVOR_COMPANY", "\"TV\"")
+            buildConfigField("String", "FLAVOR_CHANNEL", "\"TV\"")
+            manifestPlaceholders = [
+                    SHARED_USER_ID: "android.uid.TV",
+                    CHANNEL_VALUE : "TV"
+            ]
+        }
+    }
+    /*productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [
+                CHANNEL_VALUE: name
+        ]
+    }*/
+
+    // --------------- wf-update: 2020/5/9 17:58 APK formatted output ---------------
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def fileName
+            def formattedDate = new Date().format("yyyy-MM-dd-HHmmss")
+            if (variant.buildType.name == 'release') {
+                fileName = "${rootProject.apkName}_${variant.mergedFlavor.versionName}_${formattedDate}_release.apk"
+            } else {
+                fileName = "${rootProject.apkName}_${variant.mergedFlavor.versionName}_${formattedDate}_debug.apk"
+            }
+            outputFileName = fileName
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.lib_kotlin
+    implementation rootProject.lib_appcompat
+    implementation rootProject.lib_core_ktx
+    implementation rootProject.lib_constraintlayout
+    testImplementation rootProject.lib_junit
+    androidTestImplementation rootProject.lib_ext_junit
+    androidTestImplementation rootProject.lib_espresso_core
+
+    implementation project(path: ':mvp-kotlin')
+    implementation project(path: ':mvp-java')
+
+    //Memory leak
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+}
+

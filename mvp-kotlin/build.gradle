@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+/**
+ * implementation：仅仅对当前的Module提供接口
+ * api           ：使用该方式依赖的库将会参与编译和打包，可能会引起包冲突的问题
+ * compileOnly   ：只在编译时有效，不会参与打包
+ * runtimeOnly   ：只在生成apk的时候参与打包，编译时不会参与，基本上用不到
+ */
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.lib_kotlin
+    implementation rootProject.lib_appcompat
+    implementation rootProject.lib_core_ktx
+    testImplementation rootProject.lib_junit
+    androidTestImplementation rootProject.lib_ext_junit
+    androidTestImplementation rootProject.lib_espresso_core
+}

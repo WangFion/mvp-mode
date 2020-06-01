@@ -1,0 +1,69 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    ext.kotlin_version = '1.3.72'
+
+    repositories {
+        // wf-update: 2020/5/9 16:57 Add aliyun mirror to optimize jcenter and google access.
+        //maven { url = "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        // wf-update: 2020/5/9 16:57 Add aliyun mirror to optimize jcenter and google access.
+        //maven { url = "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
+// wf-update: 2020/5/9 17:49 Add common configuration information.
+/**
+ * Project version information.
+ */
+ext {
+    applicationId      = "com.wf.mvp.mode"
+    apkName            = "MvpMode"
+    versionCode        = 1
+    versionName        = "v1.0"
+    compileSdkVersion  = 29
+    buildToolsVersion  = "29.0.2"
+    minSdkVersion      = 19
+    targetSdkVersion   = 29
+}
+
+/**
+ * General lib information.
+ */
+ext {
+    lib_kotlin            = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    lib_appcompat         = 'androidx.appcompat:appcompat:1.1.0'
+    lib_core_ktx          = 'androidx.core:core-ktx:1.2.0'
+    lib_constraintlayout  = 'androidx.constraintlayout:constraintlayout:1.1.3'
+    lib_junit             = 'junit:junit:4.13'
+    lib_ext_junit         = 'androidx.test.ext:junit:1.1.1'
+    lib_espresso_core     = 'androidx.test.espresso:espresso-core:3.2.0'
+}

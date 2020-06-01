@@ -1,0 +1,4 @@
+rootProject.name='MvpMode'
+include ':app'
+include ':mvp-java'
+include ':mvp-kotlin'
