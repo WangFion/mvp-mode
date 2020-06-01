@@ -35,7 +35,6 @@ class KotlinPresenter : IPresenter<KotlinActivity>() {
     mView.XXX()
 }
 ```
-Then, you can call the KotlinPresenter interface in the KotlinActivity through **mPresenter**, 
-and call the KotlinActivity interface in the KotlinPresenter through **mView**.
+Then, you can call the KotlinPresenter function through **mPresenter**, and call the KotlinActivity function through **mView**.
 
 **That's over, just so easy !**
