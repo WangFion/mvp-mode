@@ -1,7 +1,7 @@
 # Mvp-Mode
 An mvp mode package library can help you quickly build an mvp project.
 
-This project includes java version and kotlin version, For more information please see the [janshu website](https://www.jianshu.com/p/f660b475d381).
+This project includes java version and kotlin version, For more information please see the website of [mvp](https://www.jianshu.com/p/f660b475d381) and [gradle](https://www.jianshu.com/p/1bf4d5dee595).
 
 # Getting start
 
@@ -26,12 +26,16 @@ dependencies {
 ```
 class KotlinActivity : IActivity<KotlinPresenter>() {
     ......
+    mPresenter.XXX()
 }
 ```
 ```
 class KotlinPresenter : IPresenter<KotlinActivity>() {
     ......
+    mView.XXX()
 }
 ```
+Then, you can call the KotlinPresenter interface in the KotlinActivity through **mPresenter**, 
+and call the KotlinActivity interface in the KotlinPresenter through **mView**.
 
-**That's over !**
+**That's over, just so easy !**
