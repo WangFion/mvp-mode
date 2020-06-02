@@ -15,7 +15,7 @@ allprojects {
 }
 ```
 
-**Second, add the following information to build.gradle under the mudole directory.**
+**Second, add the following information to build.gradle under the module directory.**
 ```
 dependencies {
     implementation 'com.github.WangFion:mvp-mode:1.0.0'
