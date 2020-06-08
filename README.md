@@ -23,13 +23,25 @@ dependencies {
 ```
 
 **Third, Add implementation class.**
+```java
+// java版本
+public class JavaActivity extends IActivity<JavaIPresenter> {
+    ......
+    mPresenter.XXX();
+}
+
+public class JavaIPresenter extends IPresenter<JavaActivity> {
+    ......
+    mView.XXX();
+}
 ```
+```kotlin
+// kotlin版本
 class KotlinActivity : IActivity<KotlinPresenter>() {
     ......
     mPresenter.XXX()
 }
-```
-```
+
 class KotlinPresenter : IPresenter<KotlinActivity>() {
     ......
     mView.XXX()
