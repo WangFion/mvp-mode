@@ -5,23 +5,29 @@ This project includes java version and kotlin version, For more information plea
 
 # Getting start
 
-**First, add the following information to build.gradle under the project root directory.**
+**First, Add the following information to build.gradle under the project root directory.**
 ```
 allprojects {
-	repositories {
-		......
-		maven { url 'https://jitpack.io' }
-	}
+    repositories {
+        ......
+        maven { url 'https://jitpack.io' }
+    }
 }
 ```
 
-**Second, add the following information to build.gradle under the module directory.**
+**Second, Add one of the platforms below to build.gradle under the module directory. The latest release version is [![](https://jitpack.io/v/WangFion/mvp-mode.svg)](https://jitpack.io/#WangFion/mvp-mode)**
 ```
 dependencies {
+    // both of java and kotlin platfom
     implementation 'com.github.WangFion:mvp-mode:latest'
+    
+    // only of java platfom
+    implementation 'com.github.WangFion.mvp-mode:mvp-java:latest'
+    
+    // only of kotlin platfom
+    implementation 'com.github.WangFion.mvp-mode:mvp-kotlin:latest'
 }
 ```
-The latest release version is [![](https://jitpack.io/v/WangFion/mvp-mode.svg)](https://jitpack.io/#WangFion/mvp-mode)
 
 **Third, Add implementation class.**
 ```java
@@ -62,6 +68,6 @@ class KotlinPresenter : IPresenter<KotlinActivity>() {
     ......
 }:
 ```
-Then, you can call the KotlinPresenter function through **mPresenter**, and call the KotlinActivity function through **mView**.
+Then, you can call the Presenter function through **mPresenter**, and call the View function through **mView**.
 
 **That's over, just so easy !**
