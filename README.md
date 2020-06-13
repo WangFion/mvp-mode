@@ -9,7 +9,7 @@ This project includes java version and kotlin version, For more information plea
 ```
 allprojects {
 	repositories {
-		...
+		......
 		maven { url 'https://jitpack.io' }
 	}
 }
@@ -18,34 +18,48 @@ allprojects {
 **Second, add the following information to build.gradle under the module directory.**
 ```
 dependencies {
-    implementation 'com.github.WangFion:mvp-mode:1.0.0'
+    implementation 'com.github.WangFion:mvp-mode:1.0.1'
 }
 ```
 
 **Third, Add implementation class.**
 ```java
-// java版本
+// java code
 public class JavaActivity extends IActivity<JavaIPresenter> {
     ......
-    mPresenter.XXX();
+    @Override
+    protected void initData() {
+        mPresenter.XXX();
+    }
+    ......
 }
 
 public class JavaIPresenter extends IPresenter<JavaActivity> {
     ......
-    mView.XXX();
+    @Override
+    protected void init() {
+        mView.XXX();
+    }
+    ......
 }
 ```
 ```kotlin
-// kotlin版本
+// kotlin code
 class KotlinActivity : IActivity<KotlinPresenter>() {
     ......
-    mPresenter.XXX()
+    override fun initData() {
+        mPresenter?.XXX()
+    }
+    ......
 }
 
 class KotlinPresenter : IPresenter<KotlinActivity>() {
     ......
-    mView.XXX()
-}
+    override fun init() {
+        mView?.XXX()
+    }
+    ......
+}:
 ```
 Then, you can call the KotlinPresenter function through **mPresenter**, and call the KotlinActivity function through **mView**.
 
