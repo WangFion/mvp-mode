@@ -18,9 +18,10 @@ allprojects {
 **Second, add the following information to build.gradle under the module directory.**
 ```
 dependencies {
-    implementation 'com.github.WangFion:mvp-mode:1.0.1'
+    implementation 'com.github.WangFion:mvp-mode:latest'
 }
 ```
+The latest release version is [![](https://jitpack.io/v/WangFion/mvp-mode.svg)](https://jitpack.io/#WangFion/mvp-mode)
 
 **Third, Add implementation class.**
 ```java
